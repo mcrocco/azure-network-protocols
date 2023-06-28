@@ -139,6 +139,34 @@ The next protocol we are going to observe is SSH, or secure shell, which is basi
 </p>
 <p>
 Dynamic Host Configuration Protocol (DHCP) is the next protocol we are going to observe, which is what dynamically/automatically assigns devices a IP address when it connects to a network. To do this:
+</p>
+<p>
 
+1. Filter Wireshark for DHCP traffic
+2. We can issue the Windows VM a new ip address to see DHCP traffic by going to the command line and entering "ipconfig /renew"
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+The next networking protocol we are going to observe is Domain Name System or DNS, which maps human readable text to IP addresses. To observe DNS:
+</p>
+<p>
+
+1. Filter for DNS in Wireshark
+2. In the command line, use "nslookup" to see what a website such as google.com's IP address is
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Our final networking protocol we are going to observe is Remote Desktop Protocol (RDP), which is what we used to log into the Windows and Linux VMs. To do this, simply filter for RDP traffic on Wireshark and do anything on the VM, as the protocol is constantly sending data packets between the VM and our physical device's inputs.
+</p>
+<p>
+Congrats! We were able to successfully observe various types of network traffic through virtual machines on Azure!
 </p>
 <br />
