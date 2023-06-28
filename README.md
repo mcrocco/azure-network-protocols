@@ -83,3 +83,62 @@ On the Windows VM, launch Microsoft Edge and search "Download Wireshark" and dow
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <br />
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Now we can start observe different network protocols between each VM! The first protocol we will observe is ICMP, which is a protocol used to ensure that packets of data are being sent between two addresses. Specifically, we are going to use the command line tool "ping", which utilizes an ICMP Echo Request & Reply. To do this:
+</p>
+<p>
+
+1. On Wireshark, filter for "ICMP" in the search bar and hit enter
+2. Back in the Virtual Machines page, select the Linux VM and scroll down to find it's private IP address
+3. In the Windows VM, open Command Line and type "ping <private IP address>" and hit enter
+
+</p>
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+You should see that the Windows VM sent 4 Echo ping requests and got 4 Echo replies from the Linux VM. If we wanted to block ICMP protocols from reaching the Linux VM, we can utilize Network Security Groups on Azure, which basically acts as the VM's firewall. To do this:
+</p>
+<p>
+
+1. Initiate a non-stop ping with "ping <private IP address> -t"
+2. Go to Microsoft Azure and search for Network Security Groups
+3. Select the Linux VM's NSG, and then select Inbound security rules
+4. Select Add, then ICMP and Deny (you can name it whatever you want)
+5. Click Add to create the inbound security rule
+6. Go back to Wireshark and the command line, it will start to only send Echo requests on Wireshark and saying "Request timed out" on command line
+7. Go back to Network Security Groups and delete the inbound rule that was just createed to see the ping work again with Echo replies
+</p>
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+The next protocol we are going to observe is SSH, or secure shell, which is basically Remote Desktop protocol but you can only use the command line/bash. To do this:
+</p>
+<p>
+
+1. In Wireshark filter for SSH traffic
+2. In the command line, type "ssh <usernameLinuxVM>@<private IP address of Linux VM>" and hit enter
+3. Enter yes, then enter password created for the Linux VM
+4. Once you have logged in to the LInux VM via SSH, you can type various Linux commands such as "pwd" and observe the traffic on Wireshark
+5. Type "exit" to exit SSH
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<br />
+
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Dynamic Host Configuration Protocol (DHCP) is the next protocol we are going to observe, which is what dynamically/automatically assigns devices a IP address when it connects to a network. To do this:
+
+</p>
+<br />
