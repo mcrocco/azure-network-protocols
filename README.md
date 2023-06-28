@@ -68,7 +68,10 @@ To create the Linux VM, repeat the steps above with a few minor changes:
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Congrats! You have now created two virtual machines on Microsoft Azure. To remotely connect to each, you can search for "Remote Desktop Connection" on Windows, or if you are using MacOS you can download an app called "Microsoft Remote Desktop". From there, it will ask for a public IP address of your VM. To find this, go back to the Virtual Machines page on Azure and you should see both virtual machines, along with their generated public IP address like the image below. 
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+Once you select connect in Remote Desktop, enter the username and password you created eariler for the Windows VM. Once remoted in, minimize the window and open another instance of Remote Desktop to remote in to the Linux VM. 
 </p>
 <br />
 
@@ -76,6 +79,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+On the Windows VM, launch Microsoft Edge and search "Download Wireshark" and download the Windows Intel Installer version (refer to the image above). You can also copy and paste this link into the VM: https://www.wireshark.org/. Wireshark allows us to view various networking traffic and filter for specific ports. Once installed, launch Wireshark and select Ethernet and Start Capturing Packets (shark icon). 
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <br />
