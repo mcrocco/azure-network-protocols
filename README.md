@@ -29,8 +29,9 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 
 <h2>Actions and Observations</h2>
 
+<h3>Create Virtual Machines</h3>
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/PmUM3Vm.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 To start observing network traffic, we first need to create two virtual machines on Microsoft Azure. To create the Windows VM:
@@ -62,27 +63,27 @@ To create the Linux VM, repeat the steps above with a few minor changes:
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
+<h3>Remote Desktop</h3>
 <p>
 Congrats! You have now created two virtual machines on Microsoft Azure. To remotely connect to each, you can search for "Remote Desktop Connection" on Windows, or if you are using MacOS you can download an app called "Microsoft Remote Desktop". From there, it will ask for a public IP address of your VM. To find this, go back to the Virtual Machines page on Azure and you should see both virtual machines, along with their generated public IP address like the image below. 
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/fLw8olJ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
 Once you select connect in Remote Desktop, enter the username and password you created eariler for the Windows VM. Once remoted in, minimize the window and open another instance of Remote Desktop to remote in to the Linux VM. 
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/U9QKAWO.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 On the Windows VM, launch Microsoft Edge and search "Download Wireshark" and download the Windows Intel Installer version (refer to the image above). You can also copy and paste this link into the VM: https://www.wireshark.org/. Wireshark allows us to view various networking traffic and filter for specific ports. Once installed, launch Wireshark and select Ethernet and Start Capturing Packets (shark icon). 
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <br />
+<h3>ICMP</h3>
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/PWrc8QZ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 Now we can start observe different network protocols between each VM! The first protocol we will observe is ICMP, which is a protocol used to ensure that packets of data are being sent between two addresses. Specifically, we are going to use the command line tool "ping", which utilizes an ICMP Echo Request & Reply. To do this:
@@ -95,7 +96,7 @@ Now we can start observe different network protocols between each VM! The first 
 
 </p>
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/MqMDVYO.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 You should see that the Windows VM sent 4 Echo ping requests and got 4 Echo replies from the Linux VM. If we wanted to block ICMP protocols from reaching the Linux VM, we can utilize Network Security Groups on Azure, which basically acts as the VM's firewall. To do this:
@@ -108,15 +109,21 @@ You should see that the Windows VM sent 4 Echo ping requests and got 4 Echo repl
 4. Select Add, then ICMP and Deny (you can name it whatever you want)
 5. Click Add to create the inbound security rule
 6. Go back to Wireshark and the command line, it will start to only send Echo requests on Wireshark and saying "Request timed out" on command line
-7. Go back to Network Security Groups and delete the inbound rule that was just createed to see the ping work again with Echo replies
+7. Go back to Network Security Groups and delete the inbound rule that was just created to see the ping work again with Echo replies
 </p>
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/wjS24XB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+
+
+<p>
+
+<img src="https://i.imgur.com/8AXk9KN.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<h3>SSH Protocol</h3>
 </p>
 <p>
 The next protocol we are going to observe is SSH, or secure shell, which is basically Remote Desktop protocol but you can only use the command line/bash. To do this:
@@ -128,12 +135,14 @@ The next protocol we are going to observe is SSH, or secure shell, which is basi
 3. Enter yes, then enter password created for the Linux VM
 4. Once you have logged in to the LInux VM via SSH, you can type various Linux commands such as "pwd" and observe the traffic on Wireshark
 5. Type "exit" to exit SSH
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+   
+<img src="https://i.imgur.com/AwnKeh5.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <br />
 
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/aO2pHT8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
+<h3>Dynamic Host Configuration Protocol</h3>
 <p>
 Dynamic Host Configuration Protocol (DHCP) is the next protocol we are going to observe, which is what dynamically/automatically assigns devices a IP address when it connects to a network. To do this:
 </p>
@@ -145,8 +154,9 @@ Dynamic Host Configuration Protocol (DHCP) is the next protocol we are going to 
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/4ZLOo8f.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
+<h3>DNS</h3>
 <p>
 The next networking protocol we are going to observe is Domain Name System or DNS, which maps human readable text to IP addresses. To observe DNS:
 </p>
@@ -158,11 +168,13 @@ The next networking protocol we are going to observe is Domain Name System or DN
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/IJCcns2.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
+<h3>Remote Desktop Protocol</h3>
 <p>
 Our final networking protocol we are going to observe is Remote Desktop Protocol (RDP), which is what we used to log into the Windows and Linux VMs. To do this, simply filter for RDP traffic on Wireshark and do anything on the VM, as the protocol is constantly sending data packets between the VM and our physical device's inputs.
 </p>
+<img src="https://i.imgur.com/muHtqsF.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <p>
 Congrats! We were able to successfully observe various types of network traffic through virtual machines on Azure!
 </p>
